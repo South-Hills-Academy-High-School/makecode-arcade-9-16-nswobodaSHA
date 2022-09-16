@@ -1,18 +1,18 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     vx = 0
-    vy = -1.5
+    vy = -1
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    vx = -1.5
+    vx = -1
     vy = 0
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    vx = 1.5
+    vx = 1
     vy = 0
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     vx = 0
-    vy = 1.5
+    vy = 1
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     if (atefoodflag == 0) {
@@ -122,4 +122,11 @@ game.onUpdate(function () {
     }
     snakeheadx += updatevx
     snakeheady += updatevy
+})
+game.onUpdate(function () {
+    for (let value of snakebody) {
+        if (!(value == snakebody[0]) && snakehead.overlapsWith(value)) {
+            game.over(false)
+        }
+    }
 })
